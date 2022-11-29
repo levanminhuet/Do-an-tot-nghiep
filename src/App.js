@@ -1,8 +1,21 @@
-import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { publicRoutes, profileRoutes } from "./routes/index";
+import { ToastContainer } from "react-toastify";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
-    <h1 className="text-xl font-bold underline bg-lime-600">Hello world!</h1>
+    <div>
+      <Router>
+        <Routes>
+          {publicRoutes.map((route, index) => {
+            const Page = route.component;
+            return <Route key={index} path={route.path} element={<Page />} />;
+          })}
+        </Routes>
+      </Router>
+      <ToastContainer />
+    </div>
   );
 }
 
