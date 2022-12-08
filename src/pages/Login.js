@@ -42,6 +42,7 @@ function Login() {
 
               <form>
                 {/* <!-- Email input --> */}
+
                 <div class="mb-6">
                   <p>Tên đăng nhập</p>
                   <input
@@ -85,14 +86,22 @@ function Login() {
                 </div>
 
                 {/* <!-- Submit button --> */}
-                <button
-                  type="submit"
-                  class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
-                  data-mdb-ripple="true"
-                  data-mdb-ripple-color="light"
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    goToPage("/");
+                  }}
                 >
-                  Đăng nhập
-                </button>
+                  <button
+                    type="submit"
+                    class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+                    data-mdb-ripple="true"
+                    data-mdb-ripple-color="light"
+                  >
+                    Đăng nhập
+                  </button>
+                </a>
 
                 <div class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
                   <p class="text-center font-semibold mx-4 mb-0">OR</p>
