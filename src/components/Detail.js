@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import StarRating from "./StarRating";
 function Detail() {
   return (
     <div>
@@ -15,6 +16,9 @@ function Detail() {
             </p>
             <p class="text-base leading-normal  text-gray-600 dark:text-white mt-4 lg:w-1/2 md:w-10/12 w-11/12">
               4000000 VNĐ
+            </p>
+            <p>
+              <StarRating />
             </p>
           </div>
           <div class="lg:flex items-stretch md:mt-12 mt-8">

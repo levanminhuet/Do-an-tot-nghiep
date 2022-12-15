@@ -1,18 +1,16 @@
 import React from "react";
 import Header from "../components/Header";
-import Slider from "../components/Slider/Slider";
+import Container from "../components/Search/Container";
 import Footer from "../components/Footer";
-import InputSearch from "../components/Home/InputSearch";
 
-function Home() {
+function Search() {
   return (
     <div>
       <Header />
-      <Slider />
-      <InputSearch />
+      <Container />
       <Footer />
     </div>
   );
 }
 
-export default Home;
+export default Search;

@@ -20,6 +20,8 @@ const posts = [
     address: "Cầu Giấy, Hà Nội",
     nearaddress: "Gần Trường đại học Quốc Gia",
     price: "4000000",
+    titleRate: "Rất tốt",
+    rate: "90 đánh giá",
   },
   {
     id: 2,
@@ -30,6 +32,8 @@ const posts = [
     address: "Hà Đông, Hà Nội",
     nearaddress: "Gần Aeon Hà Đông",
     price: "2000000",
+    titleRate: "Rất tốt",
+    rate: "100 đánh giá",
   },
   {
     id: 3,
@@ -40,6 +44,8 @@ const posts = [
     address: "Hà Đông, Hà Nội",
     nearaddress: "Gần Aeon Hà Đông",
     price: "1000000",
+    titleRate: "Tốt",
+    rate: "100 đánh giá",
   },
 
   // More products...
@@ -80,12 +86,13 @@ function Container() {
   return (
     <div>
       {/* <!-- component --> */}
+
       <div class="max-w-screen-xl mx-auto">
         <div class="mt-10">
           <div class="block lg:flex lg:space-x-2 px-2 lg:p-0 mt-10 mb-10">
             {/* <!-- post cards --> */}
             {/* <!-- left sidebar --> */}
-            <div class="w-full lg:w-1/4 px-3">
+            <div class="w-full lg:w-1/5 px-3">
               <Disclosure
                 as="div"
                 key={2}
@@ -140,13 +147,19 @@ function Container() {
                 )}
               </Disclosure>
             </div>
-            <div class="w-full lg:w-3/4">
+            <div class="w-full lg:w-4/5">
               {posts.map((post, index) => (
                 <Post key={index} {...post} />
               ))}
             </div>
+            {/* <div class="w-full lg:w-1/5 ">
+              <h2 className="text-l">Rất tốt</h2>
+              <p>100 đánh giá</p>
+              <StartRating />
+            </div> */}
           </div>
         </div>
+
         {/* <!-- main ends here --> */}
 
         {/* <!-- footer --> */}

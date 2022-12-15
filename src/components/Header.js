@@ -1,10 +1,17 @@
 import React from "react";
-
+import Logo from "../resources/images/logo.png";
 function Header() {
   return (
     <div>
       <nav class="flex justify-between px-20 py-10 items-center bg-white">
-        <h1 class="text-xl text-blue-600 font-bold">MY HOME</h1>
+        <div className="">
+          <img
+            class="h-12 flex-none bg-cover  "
+            src={Logo}
+            alt="#"
+            title="Logo"
+          />
+        </div>
         <div class="flex items-center">
           <div class="flex items-center">
             <svg

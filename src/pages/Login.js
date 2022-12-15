@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Logo from "../resources/images/logo.png";
 
 function Login() {
   const navigate = useNavigate();
@@ -20,10 +21,14 @@ function Login() {
               />
             </div>
             <div class="md:w-8/12 lg:w-5/12 lg:ml-20">
+              <img
+                class="h-12 flex justify-center items-center  "
+                src={Logo}
+                alt="#"
+                title="Logo"
+                style={{ "margin-left": "auto", "margin-right": "auto" }}
+              />
               <div class="mb-6 text-xl text-center ">
-                <h2 className="text-blue-600 font-bold text-xxl hover:text-blue-500 ">
-                  MY HOME
-                </h2>
                 <h2 className="py-3 font-medium  hover:text-black-500">
                   ĐĂNG NHẬP HỆ THỐNG
                 </h2>
