@@ -1,7 +1,7 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Logo from "../resources/images/logo.png";
+import InputForm from "../components/InputForm";
 
 function Login() {
   const navigate = useNavigate();

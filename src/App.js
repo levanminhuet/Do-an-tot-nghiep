@@ -3,6 +3,7 @@ import { publicRoutes, profileRoutes } from "./routes/index";
 import { ToastContainer } from "react-toastify";
 import Profile from "./pages/Profile";
 
+
 function App() {
   return (
     <div>
