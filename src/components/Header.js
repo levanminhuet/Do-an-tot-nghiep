@@ -1,6 +1,14 @@
 import React from "react";
 import Logo from "../resources/images/logo.png";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 function Header() {
+  const navigate = useNavigate();
+  const { isLoggedIn, msg, update } = useSelector((state) => state.auth);
+  const goToPage = (path) => {
+    navigate(path);
+  };
   return (
     <div>
       <nav class="flex justify-between px-20 py-10 items-center bg-white">
@@ -37,8 +45,12 @@ function Header() {
             />
           </div>
           <ul class="flex items-center space-x-6">
-            <li class="font-semibold text-gray-700">Trang chủ</li>
-            <li class="font-semibold text-gray-700">Ưu đãi</li>
+            <li class="font-semibold text-gray-700 pointer-events-none">
+              Trang chủ
+            </li>
+            <li class="font-semibold text-gray-700 pointer-events-none">
+              Ưu đãi
+            </li>
 
             <li>
               <svg
@@ -56,7 +68,30 @@ function Header() {
                 />
               </svg>
             </li>
-            <li class="font-semibold text-gray-700">Đăng nhập</li>
+            {!isLoggedIn && (
+              <li class="font-semibold text-gray-700 pointer-events">
+                <a
+                  onClick={(e) => {
+                    e.preventDefault();
+                    goToPage("/login");
+                  }}
+                >
+                  Đăng nhập
+                </a>
+              </li>
+            )}
+            {isLoggedIn && (
+              <li class="font-semibold text-gray-700 pointer-events">
+                <a
+                  onClick={(e) => {
+                    e.preventDefault();
+                    goToPage("/logout");
+                  }}
+                >
+                  Đăng xuất
+                </a>
+              </li>
+            )}
           </ul>
         </div>
       </nav>

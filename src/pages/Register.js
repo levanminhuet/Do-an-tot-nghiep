@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../resources/images/logo.png";
 import { useNavigate, useLocation } from "react-router-dom";
-import { apiRegister } from "../services/auth";
 import InputForm from "../components/InputForm";
 import Button from "../components/Button";
 import * as actions from "../store/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function Register() {
   const location = useLocation();
   const dispatch = useDispatch();
+  const [invalidFields, setInvalidFields] = useState([]);
+  const { isLoggedIn, msg, update } = useSelector((state) => state.auth);
 
-  const [isRegister, setIsRegister] = useState(location.state?.flag);
-  // const navigate = useNavigate();
-  // const goToPage = (path) => {
-  //   navigate(path);
-  // };
+  const [isLogin, setLogin] = useState(location.state?.flag);
+  const navigate = useNavigate();
+  const goToPage = (path) => {
+    navigate(path);
+  };
 
   const [payload, setPayload] = useState({
     name: "",
@@ -23,15 +24,71 @@ function Register() {
     password: "",
   });
 
-  useEffect(() => {
-    setIsRegister(location.state?.flag);
-  }, [location.state?.flag]);
-  // console.log(location.state);
+  // useEffect(() => {
+  //   isLoggedIn && navigate("/");
+  // }, [isLoggedIn]);
+
+  // useEffect(() => {
+  //   setLogin(location.state?.flag);
+  // }, [location.state?.flag]);
 
   const handleSubmit = async () => {
-    dispatch(actions.register(payload));
-    console.log(payload);
+    let invalids = validate(payload);
+    if (invalids === 0) {
+      dispatch(actions.register(payload));
+      console.log(payload);
+    }
   };
+
+  const validate = (payload) => {
+    let invalids = 0;
+    let fields = Object.entries(payload);
+    fields.forEach((item) => {
+      if (item[1] === "") {
+        setInvalidFields((prev) => [
+          ...prev,
+          {
+            name: item[0],
+            message: "Bạn không được bỏ trống trường này.",
+          },
+        ]);
+        invalids++;
+      }
+    });
+    fields.forEach((item) => {
+      switch (item[0]) {
+        case "password":
+          if (item[1].length < 6) {
+            setInvalidFields((prev) => [
+              ...prev,
+              {
+                name: item[0],
+                message: "Mật khẩu phải có tối thiểu 6 kí tự.",
+              },
+            ]);
+            invalids++;
+          }
+          break;
+        case "phone":
+          if (!+item[1]) {
+            setInvalidFields((prev) => [
+              ...prev,
+              {
+                name: item[0],
+                message: "Số điện thoại không hợp lệ.",
+              },
+            ]);
+            invalids++;
+          }
+          break;
+
+        default:
+          break;
+      }
+    });
+    return invalids;
+  };
+
   return (
     <div>
       <section className="h-screen">
@@ -52,26 +109,40 @@ function Register() {
                 title="Logo"
                 style={{ "margin-left": "auto", "margin-right": "auto" }}
               />
-              <div className="mb-6 text-xl text-center ">
-                <h2 className="py-4 font-medium  hover:text-black-500">
-                  {isRegister ? "Đăng ký tài khoản" : "Đăng nhập tài khoản"}
+              <div class="mb-6 text-xl text-center ">
+                <h2 className="py-3 font-medium  hover:text-black-500">
+                  ĐĂNg KÝ HỆ THỐNG
                 </h2>
+                hoặc
+                <a
+                  href="#"
+                  className=" px-2 font-medium text-blue-600 "
+                  onClick={(e) => {
+                    e.preventDefault();
+                    goToPage("/login");
+                  }}
+                >
+                  Đăng nhập tài khoản
+                </a>
               </div>
               <form>
                 {/* <!-- Email input --> */}
                 <div className="mb-6">
                   <p>Tên đăng nhập</p>
                   <InputForm
+                    setInvalidFields={setInvalidFields}
+                    invalidFields={invalidFields}
                     placeholder="Nhập tên đăng nhập"
                     value={payload.name}
                     setValue={setPayload}
                     type={"name"}
                   />
                 </div>
-
                 <div className="mb-6">
                   <p>Số điện thoại</p>
                   <InputForm
+                    setInvalidFields={setInvalidFields}
+                    invalidFields={invalidFields}
                     // class="form-control block w-full px-4 py-2 text-l font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Nhập SĐT"
                     value={payload.phone}
@@ -84,6 +155,8 @@ function Register() {
                 <div className="mb-6">
                   <p>Mật khẩu</p>
                   <InputForm
+                    setInvalidFields={setInvalidFields}
+                    invalidFields={invalidFields}
                     // class="form-control block w-full px-4 py-2 text-l font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Nhập mật khẩu"
                     value={payload.password}
@@ -91,7 +164,6 @@ function Register() {
                     type={"password"}
                   />
                 </div>
-
                 {/* <div class="mb-6">
                   <p>Nhập lại mật khẩu</p>
                   <input
@@ -100,10 +172,9 @@ function Register() {
                     placeholder="Nhập lại mật khẩu"
                   />
                 </div> */}
-
                 {/* <!-- Submit button --> */}
                 <Button
-                  text={isRegister ? "Đăng kí" : "Đăng nhập"}
+                  text={"Đăng ký"}
                   bgColor="bg-secondary1"
                   onClick={handleSubmit}
                   className="text-gray-700"
