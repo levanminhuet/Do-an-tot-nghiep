@@ -1,10 +1,12 @@
 import React from "react";
 import Logo from "../resources/images/logo.png";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import * as actions from "../store/actions";
 
 function Header() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { isLoggedIn, msg, update } = useSelector((state) => state.auth);
   const goToPage = (path) => {
     navigate(path);
@@ -82,14 +84,7 @@ function Header() {
             )}
             {isLoggedIn && (
               <li class="font-semibold text-gray-700 pointer-events">
-                <a
-                  onClick={(e) => {
-                    e.preventDefault();
-                    goToPage("/logout");
-                  }}
-                >
-                  Đăng xuất
-                </a>
+                <a onClick={() => dispatch(actions.logout())}>Đăng xuất</a>
               </li>
             )}
           </ul>
