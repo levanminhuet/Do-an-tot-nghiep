@@ -13,12 +13,12 @@ import {
 const posts = [
   {
     id: 1,
-    name: "Chung cư độc thân",
+    name: "Nhà thông minh",
     href: "#",
     imageSrc: Home,
     imageAlt: "Home",
-    address: "Xuân Thuỷ, Cầu Giấy, Hà Nội",
-    nearaddress: "Gần Trường đại học sư phạm 1",
+    address: "Cầu Giấy, Hà Nội",
+    nearaddress: "Gần Trường đại học Quốc Gia",
     price: "4000000",
     titleRate: "Rất tốt",
     rate: "90 đánh giá",
@@ -29,7 +29,7 @@ const posts = [
     href: "#",
     imageSrc: Home,
     imageAlt: "Home",
-    address: "Trần Quốc Hoàn, Cầu Giấy, Hà Nội",
+    address: "Trần Quốc HoànCầu Giấy, Hà Nội",
     nearaddress: "",
     price: "2000000",
     titleRate: "Rất tốt",
@@ -37,15 +37,15 @@ const posts = [
   },
   {
     id: 3,
-    name: "Chung cư mini",
+    name: "nhà 3 tầng",
     href: "#",
     imageSrc: Home,
     imageAlt: "Home",
-    address: "Phạm Hùng, Cầu Giấy, Hà Nội",
+    address: "Đông Anh, Hà Nội",
     nearaddress: "",
     price: "1000000",
     titleRate: "Tốt",
-    rate: "100 đánh giá",
+    rate: "190 đánh giá",
   },
 
   // More products...
@@ -147,9 +147,7 @@ function Container() {
                 )}
               </Disclosure>
             </div>
-
             <div className="w-full lg:w-4/5">
-              <h1>Kết quả tìm kiếm</h1>
               {posts.map((post, index) => (
                 <Post key={index} {...post} />
               ))}

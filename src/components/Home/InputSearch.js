@@ -1,6 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function InputSearch() {
+  const navigate = useNavigate();
+  const goToPage = (path) => {
+    navigate(path);
+  };
   return (
     <div>
       <div>
@@ -9,11 +14,11 @@ function InputSearch() {
         </h2>
       </div>
       <div className="max-w-screen-xl mx-auto  mt-1 flex justify-center items-center px-20">
-        <div class="flex items-center p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
-          <div class="flex bg-gray-100 p-2 w-72 space-x-4 rounded-lg">
+        <div className="flex items-center p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500">
+          <div className="flex bg-gray-100 p-2 w-72 space-x-4 rounded-lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 opacity-30"
+              className="h-6 w-6 opacity-30"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -26,17 +31,17 @@ function InputSearch() {
               />
             </svg>
             <input
-              class="bg-gray-100 outline-none"
+              className="bg-gray-100 outline-none"
               type="text"
               placeholder="Nhập địa chỉ phòng trọ..."
             />
           </div>
-          <div class="flex py-3 px-4 rounded-lg text-gray-500 font-semibold cursor-pointer">
+          <div className="flex py-3 px-4 rounded-lg text-gray-500 font-semibold cursor-pointer">
             <span>All</span>
 
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
+              className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -49,8 +54,16 @@ function InputSearch() {
               />
             </svg>
           </div>
-          <div class="bg-indigo-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
-            <span>Search</span>
+          <div className="bg-indigo-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                goToPage("/search");
+              }}
+            >
+              Tìm kiếm
+            </a>
           </div>
         </div>
       </div>

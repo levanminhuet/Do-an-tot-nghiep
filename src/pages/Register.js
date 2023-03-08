@@ -24,9 +24,9 @@ function Register() {
     password: "",
   });
 
-  // useEffect(() => {
-  //   isLoggedIn && navigate("/");
-  // }, [isLoggedIn]);
+  useEffect(() => {
+    isLoggedIn && navigate("/");
+  }, [isLoggedIn]);
 
   // useEffect(() => {
   //   setLogin(location.state?.flag);
@@ -109,7 +109,7 @@ function Register() {
                 title="Logo"
                 style={{ "margin-left": "auto", "margin-right": "auto" }}
               />
-              <div class="mb-6 text-xl text-center ">
+              <div className="mb-6 text-xl text-center ">
                 <h2 className="py-3 font-medium  hover:text-black-500">
                   ĐĂNg KÝ HỆ THỐNG
                 </h2>
@@ -135,7 +135,7 @@ function Register() {
                     placeholder="Nhập tên đăng nhập"
                     value={payload.name}
                     setValue={setPayload}
-                    type={"name"}
+                    keyPayload={"name"}
                   />
                 </div>
                 <div className="mb-6">
@@ -143,11 +143,11 @@ function Register() {
                   <InputForm
                     setInvalidFields={setInvalidFields}
                     invalidFields={invalidFields}
-                    // class="form-control block w-full px-4 py-2 text-l font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    // className="form-control block w-full px-4 py-2 text-l font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Nhập SĐT"
                     value={payload.phone}
                     setValue={setPayload}
-                    type={"phone"}
+                    keyPayload={"phone"}
                   />
                 </div>
 
@@ -157,30 +157,33 @@ function Register() {
                   <InputForm
                     setInvalidFields={setInvalidFields}
                     invalidFields={invalidFields}
-                    // class="form-control block w-full px-4 py-2 text-l font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    // className="form-control block w-full px-4 py-2 text-l font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Nhập mật khẩu"
                     value={payload.password}
                     setValue={setPayload}
-                    type={"password"}
+                    keyPayload={"password"}
+                    type="password"
                   />
                 </div>
-                {/* <div class="mb-6">
+                {/* <div className="mb-6">
                   <p>Nhập lại mật khẩu</p>
                   <input
                     type="password"
-                    class="form-control block w-full px-4 py-2 text-l font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    className="form-control block w-full px-4 py-2 text-l font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="Nhập lại mật khẩu"
                   />
                 </div> */}
                 {/* <!-- Submit button --> */}
-                <Button
-                  text={"Đăng ký"}
-                  bgColor="bg-secondary1"
-                  onClick={handleSubmit}
-                  className="text-gray-700"
-                >
-                  Đăng ký
-                </Button>
+                <div className="flex justify-center text-xl">
+                  <Button
+                    text={"Đăng nhập"}
+                    bgColor="bg-blue-500"
+                    onClick={handleSubmit}
+                    className="text-gray-700"
+                  >
+                    Đăng ký
+                  </Button>
+                </div>
               </form>
             </div>
           </div>
