@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Logo from "../resources/images/logo.png";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,6 +6,7 @@ import * as actions from "../store/actions";
 import { apiGetCategories } from "../services/caregory";
 import { formatVietNam } from "../uitils/formatVietNam";
 import "../Style/Header.css";
+import { useSearchParams } from "react-router-dom";
 
 const notActive = "hover:bg-bule";
 const active = "hover:bg-red";
@@ -13,24 +14,31 @@ const active = "hover:bg-red";
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const headerRef = useRef();
+  const [searchParams] = useSearchParams();
   const { isLoggedIn, msg, update } = useSelector((state) => state.auth);
   const goToPage = (path) => {
     navigate(path);
   };
 
-  const [categories, setCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
+  const { categories } = useSelector((state) => state.app);
+  useEffect(() => {
+    // const fetchCategories = async () => {
+    //   const response = await apiGetCategories();
+    //   if (response?.data.err === 0) {
+    //     setCategories(response.data.response);
+    //   }
+    // };
+    // fetchCategories();
+    dispatch(actions.getCategories());
+  }, []);
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      const response = await apiGetCategories();
-      if (response?.data.err === 0) {
-        setCategories(response.data.response);
-      }
-    };
-    fetchCategories();
-  }, []);
+    headerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [searchParams.get("page")]);
   return (
-    <div>
+    <div ref={headerRef}>
       <div className="flex justify-between px-20 py-10 items-center bg-white">
         <div>
           <img
@@ -91,52 +99,13 @@ function Header() {
                   </div>
                 );
               })}
-            {/* <div className=" font-semibold text-gray-700 hover:text-blue-600 pointer-events">
-              <Link className="underlinestyle" to={"/house"}>
-                Thuê nhà
-              </Link>
-            </div> */}
-            {/* <div className="underlinestyle font-semibold text-gray-700 pointer-events hover:text-blue-600">
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  goToPage("/room");
-                }}
-              >
-                Thuê phòng
-              </a>
-            </div> */}
-
-            {/* <div className="font-semibold text-gray-700 pointer-events">
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  goToPage("/apartment");
-                }}
-              >
-                Thuê căn hộ
-              </a>
-            </div> */}
-
-            {/* <div className="font-semibold text-gray-700 pointer-events">
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  goToPage("/ground");
-                }}
-              >
-                Thuê mặt bằng
-              </a>
-            </div> */}
+  
             <div className="font-semibold text-gray-700 pointer-events">
               <a
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  goToPage("/ground");
+                  goToPage("/he-thong");
                 }}
               >
                 Đăng bài

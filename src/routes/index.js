@@ -7,6 +7,8 @@ import Ground from "../pages/Ground";
 import House from "../pages/House";
 import Room from "../pages/Room";
 import Apartment from "../pages/Apartment";
+import System from "../pages/System/System";
+import CreatePost from "../pages/System/CreatePost";
 const publicRoutes = [
   { path: "/", component: Home },
   { path: "/login", component: Login },
@@ -16,8 +18,11 @@ const publicRoutes = [
   { path: "/cho-thue-nha", component: House },
   { path: "/cho-thue-phong", component: Room },
 
+  { path: "/he-thong", component: System },
+
   { path: "/detail", component: Detail },
   { path: "/search", component: Search },
+  { path: "/ht", component: CreatePost },
 ];
 
 // const privateRoutes = [{ path: "/home", component: Home }];
