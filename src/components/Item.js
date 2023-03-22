@@ -1,7 +1,7 @@
 import React from "react";
 import { memo } from "react";
 import { GrStar } from "react-icons/gr";
-import { BsBookmarkStarFill } from "react-icons/bs";
+import "../Style/Item.css";
 
 function Item({ images, address, attributes, description, star, title, user }) {
   const indexs = [0];
@@ -20,14 +20,7 @@ function Item({ images, address, attributes, description, star, title, user }) {
               images
                 .filter((i, index) => indexs.some((i) => i === index))
                 ?.map((i, index) => {
-                  return (
-                    <img
-                      key={index}
-                      src={i}
-                      alt="preview"
-                      // className="w-[47%] h-[120px] object-cover"
-                    />
-                  );
+                  return <img key={index} src={i} alt="preview" />;
                 })}
           </div>
           <div className="bg-white rounded px-4 flex flex-col justify-between leading-normal">
@@ -54,7 +47,7 @@ function Item({ images, address, attributes, description, star, title, user }) {
                 </a>
               </p>
               <p className="text-gray-600 text-base"></p>
-              <p className="text-gray-600 text-base text-ellipsis">
+              <p className="text-gray-600 text-base text-ellipsis an">
                 {description}
               </p>
               <p className="text-blue-600 text-xl"> {attributes?.price}</p>

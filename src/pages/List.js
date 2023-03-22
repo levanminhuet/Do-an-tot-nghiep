@@ -49,6 +49,10 @@ const List = ({ categoryCode }) => {
     dispatch(actions.getAreas());
   }, []);
 
+  // useEffect(() => {
+  //   dispatch(actions.getProvinces());
+  // }, []);
+
   // console.log(prices);
 
   return (

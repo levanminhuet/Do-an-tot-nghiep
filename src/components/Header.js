@@ -78,7 +78,7 @@ function Header() {
           </div>
           <div className="flex items-center space-x-6">
             <div className="font-semibold text-gray-700 hover:bg-blue-400 pointer-events-none">
-              <NavLink to="/">Trang chủ</NavLink>
+              <Link to="/">Trang chủ</Link>
             </div>
 
             {categories?.length > 0 &&
@@ -99,7 +99,7 @@ function Header() {
                   </div>
                 );
               })}
-  
+
             <div className="font-semibold text-gray-700 pointer-events">
               <a
                 href="#"
