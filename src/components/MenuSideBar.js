@@ -6,7 +6,7 @@ const menuSidebar = [
   {
     id: 1,
     text: "Đăng tin cho thuê",
-    path: "/he-thong/tao-moi-bai-dang",
+    path: "/system/createpost",
     icon: <ImPencil2 />,
   },
   {

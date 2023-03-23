@@ -8,7 +8,7 @@ function Search() {
   return (
     <div>
       <Header />
-      <div className="flex text-blue-700 justify-center items-center font-bold text-xl ">
+      <div className="flex text-blue-400 justify-center items-center font-bold text-xl ">
         <FcSearch size={24} className="mr-2" />
         <h1>KẾT QUẢ TÌM KIẾM</h1>
       </div>

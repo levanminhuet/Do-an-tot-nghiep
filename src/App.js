@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { publicRoutes, profileRoutes } from "./routes/index";
+import { publicRoutes, privateRoutes } from "./routes/index";
 import { ToastContainer } from "react-toastify";
-import Profile from "./pages/Profile";
+import System from "./pages/System/System";
 
 function App() {
   return (
@@ -12,8 +12,16 @@ function App() {
             const Page = route.component;
             return <Route key={index} path={route.path} element={<Page />} />;
           })}
+
+          <Route path="/system" element={<System />}>
+            {privateRoutes.map((route, index) => {
+              const Page = route.component;
+              return <Route key={index} path={route.path} element={<Page />} />;
+            })}
+          </Route>
         </Routes>
       </Router>
+
       <ToastContainer />
     </div>
   );

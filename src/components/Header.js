@@ -17,6 +17,7 @@ function Header() {
   const headerRef = useRef();
   const [searchParams] = useSearchParams();
   const { isLoggedIn, msg, update } = useSelector((state) => state.auth);
+  const { currentData } = useSelector((state) => state.user);
   const goToPage = (path) => {
     navigate(path);
   };
@@ -37,6 +38,13 @@ function Header() {
   useEffect(() => {
     headerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [searchParams.get("page")]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      isLoggedIn && dispatch(actions.getCurrent());
+    }, 1000);
+  }, [isLoggedIn]);
+  console.log(currentData);
   return (
     <div ref={headerRef}>
       <div className="flex justify-between px-20 py-10 items-center bg-white">
@@ -100,18 +108,19 @@ function Header() {
                 );
               })}
 
-            <div className="font-semibold text-gray-700 pointer-events">
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  goToPage("/he-thong");
-                }}
-              >
-                Đăng bài
-              </a>
-            </div>
-
+            {isLoggedIn && (
+              <div className="font-semibold text-gray-700 pointer-events">
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    goToPage("/system");
+                  }}
+                >
+                  Đăng bài
+                </a>
+              </div>
+            )}
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

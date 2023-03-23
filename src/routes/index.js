@@ -18,20 +18,12 @@ const publicRoutes = [
   { path: "/cho-thue-nha", component: House },
   { path: "/cho-thue-phong", component: Room },
 
-  { path: "/he-thong", component: System },
+  { path: "/system", component: System },
 
   { path: "/detail", component: Detail },
   { path: "/search", component: Search },
-  { path: "/ht", component: CreatePost },
 ];
 
-// const privateRoutes = [{ path: "/home", component: Home }];
+const privateRoutes = [{ path: "createpost", component: CreatePost }];
 
-// const profileRoutes = [
-//   // { path: '/', component: Profile},
-//   { path: "address", component: Address },
-//   { path: "password", component: Password },
-//   { path: "purchase", component: Purchase },
-// ];
-
-export { publicRoutes };
+export { publicRoutes, privateRoutes };
