@@ -86,7 +86,15 @@ function Header() {
           </div>
           <div className="flex items-center space-x-6">
             <div className="font-semibold text-gray-700 hover:bg-blue-400 pointer-events-none">
-              <Link to="/">Trang chủ</Link>
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  goToPage("/");
+                }}
+              >
+                Trang chủ
+              </a>
             </div>
 
             {categories?.length > 0 &&
@@ -96,14 +104,23 @@ function Header() {
                     key={index}
                     className=" font-semibold text-gray-700 text-l hover:text-blue-600 pointer-events"
                   >
-                    <Link
+                    {/* <Link
                       to={`${formatVietNam(item.value)}`}
                       className={({ isActive }) =>
                         isActive ? active : notActive
                       }
                     >
                       {item.value}
-                    </Link>
+                    </Link> */}
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        goToPage(`/${formatVietNam(item.value)}`);
+                      }}
+                    >
+                      {item.value}
+                    </a>
                   </div>
                 );
               })}
