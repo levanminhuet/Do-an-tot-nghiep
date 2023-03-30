@@ -12,19 +12,19 @@ const menuSidebar = [
   {
     id: 2,
     text: "Quản lý tin đăng",
-    path: "/he-thong/quan-ly-bai-dang",
+    path: "/system/quan-ly-bai-dang",
     icon: <MdOutlineLibraryBooks />,
   },
   {
     id: 4,
     text: "Sửa thông tin cá nhân",
-    path: "/he-thong/sua-thong-tin-ca-nhan",
+    path: "/system/sua-thong-tin-ca-nhan",
     icon: <BiUserPin />,
   },
   {
     id: 5,
     text: "Liên hệ",
-    path: "/he-thong/lien-he",
+    path: "/system/lien-he",
     icon: <BiUserPin />,
   },
 ];

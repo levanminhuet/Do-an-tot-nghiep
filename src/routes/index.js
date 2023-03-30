@@ -9,6 +9,8 @@ import Room from "../pages/Room";
 import Apartment from "../pages/Apartment";
 import System from "../pages/System/System";
 import CreatePost from "../pages/System/CreatePost";
+import ManagePost from "../pages/System/MannagePost";
+import Contact from "../pages/System/Contact";
 const publicRoutes = [
   { path: "/", component: Home },
   { path: "/login", component: Login },
@@ -24,6 +26,11 @@ const publicRoutes = [
   { path: "/search", component: Search },
 ];
 
-const privateRoutes = [{ path: "createpost", component: CreatePost }];
+const privateRoutes = [
+  { path: "createpost", component: CreatePost },
+  { path: "quan-ly-bai-dang", component: ManagePost },
+  { path: "lien-he", component: Contact },
+  // { path: "sua-thong-tin-ca-nhan", component: ManagePost },
+];
 
 export { publicRoutes, privateRoutes };
