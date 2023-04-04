@@ -11,6 +11,8 @@ import System from "../pages/System/System";
 import CreatePost from "../pages/System/CreatePost";
 import ManagePost from "../pages/System/MannagePost";
 import Contact from "../pages/System/Contact";
+import EditAccount from "../pages/System/EditAccount";
+import DetailPost from "../pages/DetailPost";
 const publicRoutes = [
   { path: "/", component: Home },
   { path: "/login", component: Login },
@@ -22,7 +24,8 @@ const publicRoutes = [
 
   { path: "/system", component: System },
 
-  { path: "/detail", component: Detail },
+  { path: "/chi-tiet", component: Detail },
+  { path: "chi-tiet/:title/:postId", component: DetailPost },
   { path: "/search", component: Search },
 ];
 
@@ -30,7 +33,7 @@ const privateRoutes = [
   { path: "createpost", component: CreatePost },
   { path: "quan-ly-bai-dang", component: ManagePost },
   { path: "lien-he", component: Contact },
-  // { path: "sua-thong-tin-ca-nhan", component: ManagePost },
+  { path: "sua-thong-tin-ca-nhan", component: EditAccount },
 ];
 
 export { publicRoutes, privateRoutes };

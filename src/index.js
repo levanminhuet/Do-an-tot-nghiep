@@ -5,6 +5,8 @@ import App from "./App";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import reduxStore from "./redux";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const { store, persistor } = reduxStore();
 

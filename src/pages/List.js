@@ -67,7 +67,10 @@ const List = ({ categoryCode }) => {
         />
       </div>
 
-      <div className="w-full lg:w-5/6 ">
+      <div className="w-full lg:w-5/6 mt-5 ml-2 mr-4 ">
+        <div className="text-lg text-blue-400 font-semibold ml-5 mt-4">
+          Danh sách tin đăng
+        </div>
         {posts?.length > 0 &&
           posts.map((item) => {
             return (
@@ -76,10 +79,11 @@ const List = ({ categoryCode }) => {
                 address={item?.address}
                 attributes={item?.attributes}
                 description={JSON.parse(item?.description)}
-                images={JSON.parse(item.images?.image)}
-                title={item.title}
-                user={item.user}
-                star={item.star}
+                images={JSON.parse(item?.images?.image)}
+                star={+item?.star}
+                title={item?.title}
+                user={item?.user}
+                id={item?.id}
               />
             );
           })}
