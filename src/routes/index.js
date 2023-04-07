@@ -13,6 +13,10 @@ import ManagePost from "../pages/System/MannagePost";
 import Contact from "../pages/System/Contact";
 import EditAccount from "../pages/System/EditAccount";
 import DetailPost from "../pages/DetailPost";
+import ManageExpired from "../pages/Admin/ManageExpired";
+import ManageUser from "../pages/Admin/ManageUser";
+import ManageReport from "../pages/Admin/ManageReport";
+import Dashboard from "../pages/Admin/Dashboard";
 const publicRoutes = [
   { path: "/", component: Home },
   { path: "/login", component: Login },
@@ -36,4 +40,12 @@ const privateRoutes = [
   { path: "sua-thong-tin-ca-nhan", component: EditAccount },
 ];
 
-export { publicRoutes, privateRoutes };
+const AdminRoutes = [
+  { path: "manageExpired", component: ManageExpired },
+  { path: "manageUser", component: ManageUser },
+  { path: "editAccount", component: EditAccount },
+  { path: "manageReport", component: ManageReport },
+  { path: "dashboard", component: Dashboard },
+];
+
+export { publicRoutes, privateRoutes, AdminRoutes };
