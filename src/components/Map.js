@@ -34,7 +34,7 @@ const Map = ({ address }) => {
         </div>
       )}
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyAj0vPQ1s82LsUS2s3qWXyu1LAMCKpYweU" }}
+        bootstrapURLKeys={{ key: process.env.REACT_APP_MAP_API }}
         defaultCenter={coords}
         defaultZoom={11}
         center={coords}

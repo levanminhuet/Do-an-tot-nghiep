@@ -1,8 +1,8 @@
 import React, { useState, useEffect, memo } from "react";
-import { getNumbersPrice, getNumbersArea } from "../uitils/Common/getNumbers";
-import { getCodes, getCodesArea } from "../uitils/Common/getCodes";
+import icons from "../ultils/icons";
+import { getNumbersPrice, getNumbersArea } from "../ultils/Common/getNumbers";
 
-import { IoMdArrowRoundBack } from "react-icons/io";
+const { GrLinkPrevious } = icons;
 
 const Modal = ({
   setIsShowModal,
@@ -91,16 +91,20 @@ const Modal = ({
   const handleBeforeSubmit = (e) => {
     let min = persent1 <= persent2 ? persent1 : persent2;
     let max = persent1 <= persent2 ? persent2 : persent1;
-    let arrMinMax = [convert100toTarget(min), convert100toTarget(max)];
-    // const gaps = name === 'price'
-    //     ? getCodes(arrMinMax, content)
-    //     : name === 'area' ? getCodesArea(arrMinMax, content) : []
+    let arrMinMax =
+      persent1 === persent2 && persent1 === 100
+        ? [convert100toTarget(min), 99999]
+        : [convert100toTarget(min), convert100toTarget(max)];
     handleSubmit(
       e,
       {
         [`${name}Number`]: arrMinMax,
-        [name]: `Từ ${convert100toTarget(min)} - ${convert100toTarget(max)} ${
-          name === "price" ? "triệu" : "m2"
+        [name]: `Từ ${convert100toTarget(min)}${
+          persent1 === persent2 && persent1 === 100
+            ? ""
+            : ` - ${convert100toTarget(max)}`
+        } ${name === "price" ? "triệu" : "m2"} ${
+          persent1 === persent2 && persent1 === 100 ? "trở lên" : ""
         }`,
       },
       {
@@ -114,7 +118,7 @@ const Modal = ({
       onClick={() => {
         setIsShowModal(false);
       }}
-      className="fixed top-0 left-0 right-0 bottom-0  bg-overlay-53 z-20 flex justify-center items-center"
+      className="fixed top-0 left-0 right-0 bottom-0 bg-overlay-70 z-20 flex justify-center items-center"
     >
       <div
         onClick={(e) => {
@@ -123,7 +127,7 @@ const Modal = ({
         }}
         className="w-2/5 h-[500px] bg-white rounded-md relative"
       >
-        <div className="h-[45px] px-4 flex items-center border-b border-gray-200 ml-2 mr-2">
+        <div className="h-[45px] px-4 flex items-center border-b border-gray-200">
           <span
             className="cursor-pointer"
             onClick={(e) => {
@@ -131,7 +135,7 @@ const Modal = ({
               setIsShowModal(false);
             }}
           >
-            <IoMdArrowRoundBack size={23} />
+            <GrLinkPrevious size={24} />
           </span>
         </div>
         {(name === "category" || name === "province") && (
@@ -182,7 +186,7 @@ const Modal = ({
         {(name === "price" || name === "area") && (
           <div className="p-12 py-20 ">
             <div className="flex flex-col items-center justify-center relative">
-              <div className="z-30 absolute top-[-48px] font-bold text-xl text-blue-600">
+              <div className="z-30 absolute top-[-48px] font-bold text-xl text-orange-600">
                 {persent1 === 100 && persent2 === 100
                   ? `Trên ${convert100toTarget(persent1)} ${
                       name === "price" ? "triệu" : "m2"
@@ -205,7 +209,7 @@ const Modal = ({
               <div
                 onClick={handleClickTrack}
                 id="track-active"
-                className="slider-track-active h-[5px] absolute top-0 bottom-0 bg-blue-400 rounded-full"
+                className="slider-track-active h-[5px] absolute top-0 bottom-0 bg-orange-600 rounded-full"
               ></div>
               <input
                 max="100"
@@ -279,7 +283,7 @@ const Modal = ({
         {(name === "price" || name === "area") && (
           <button
             type="button"
-            className="w-full absolute bottom-0 bg-blue-700 py-2 font-medium rounded-bl-md rounded-br-md"
+            className="w-full absolute bottom-0 bg-blue-600 py-2 font-medium rounded-bl-md rounded-br-md"
             onClick={handleBeforeSubmit}
           >
             ÁP DỤNG
