@@ -1,52 +1,48 @@
-import React, { memo, useEffect, useState } from "react";
-import GoogleMapReact from "google-map-react";
-import { HiLocationMarker } from "react-icons/hi";
-import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
+import React, { useEffect } from "react";
+import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 
-const Position = ({ icon }) => <div>{icon}</div>;
-
-const Map = ({ address }) => {
-  const [coords, setCoords] = useState(null);
-
-  useEffect(() => {
-    const getCoords = async () => {
-      const results = await geocodeByAddress(address);
-      const latLng = await getLatLng(results[0]);
-      console.log(latLng);
-      setCoords(latLng);
-    };
-    if (address) {
-      getCoords();
-    } else {
-      navigator.geolocation.getCurrentPosition(
-        ({ coords: { latitude, longitude } }) => {
-          setCoords({ lat: latitude, lng: longitude });
-        }
-      );
-    }
-  }, [address]);
-
-  return (
-    <div className="h-[300px] w-full relative">
-      {address && (
-        <div className="absolute top-[8px] left-[8px] z-50 max-w-[200px] rounded-md bg-white shadow-md p-4 text-xs">
-          {address}
-        </div>
-      )}
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: process.env.REACT_APP_MAP_API }}
-        defaultCenter={coords}
-        defaultZoom={11}
-        center={coords}
-      >
-        <Position
-          lat={coords?.lat}
-          lng={coords?.lng}
-          icon={<HiLocationMarker color="red" size={24} />}
-        />
-      </GoogleMapReact>
-    </div>
-  );
+const containerStyle = {
+  width: "100%",
+  height: "300px",
 };
 
-export default memo(Map);
+const center = {
+  lat: 21.027763,
+  lng: 105.83416,
+};
+
+function Map({ coords }) {
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: process.env.REACT_APP_MAP_API,
+  });
+
+  // const [map, setMap] = React.useState(null)
+
+  // const onLoad = React.useCallback(function callback(map) {
+  //     // This is just an example of getting and using the map instance!!! don't just blindly copy!
+  //     const bounds = new window.google.maps.LatLngBounds(center);
+  //     map.fitBounds(bounds);
+
+  //     setMap(map)
+  // }, [])
+  // const onUnmount = React.useCallback(function callback(map) {
+  //     setMap(null)
+  // }, [])
+
+  return isLoaded ? (
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={coords}
+      zoom={18}
+      // onLoad={onLoad}
+      // onUnmount={onUnmount}
+    >
+      <Marker position={coords} />
+    </GoogleMap>
+  ) : (
+    <></>
+  );
+}
+
+export default React.memo(Map);

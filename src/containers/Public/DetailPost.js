@@ -15,7 +15,7 @@ import { useNavigate, createSearchParams, Link } from "react-router-dom";
 import { path } from "../../ultils/constant";
 import { apiGetPost } from "../../services/post";
 import { useSelector } from "react-redux";
-import { underMap } from "../../ultils/constant";
+import Geocode from "react-geocode";
 
 const {
   HiLocationMarker,
@@ -29,10 +29,10 @@ const {
 const DetailPost = () => {
   const { postId } = useParams();
   const navigate = useNavigate();
+  const [coords, setCoords] = useState({});
   const [post, setPost] = useState(null);
   const [isVote, setIsVote] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.auth);
-  const { posts } = useSelector((state) => state.post);
   const [render, setRender] = useState(false);
   const [isReport, setIsReport] = useState(null);
 
@@ -44,6 +44,21 @@ const DetailPost = () => {
   useEffect(() => {
     fetchPost();
   }, [postId, isVote, render]);
+  useEffect(() => {
+    Geocode.setApiKey(process.env.REACT_APP_MAP_API);
+    Geocode.setLanguage("vi");
+    if (post && post.address) {
+      Geocode.fromAddress(post.address).then(
+        (response) => {
+          const { lat, lng } = response.results[0].geometry.location;
+          setCoords({ lat, lng });
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+  }, [post]);
   // console.log(post);
   const handleFilterLabel = () => {
     const titleSearch = `Tìm kiếm tin đăng theo chuyên mục ${post?.labelData?.value}`;
@@ -59,7 +74,7 @@ const DetailPost = () => {
   };
 
   return (
-    <div className="w-full flex gap-4 relative">
+    <div className="w-full lg:flex-row flex flex-col gap-4 relative">
       {isVote && (
         <div
           className="fixed top-0 left-0 right-0 bottom-0 z-50 bg-overlay-30 flex items-center justify-center"
@@ -76,11 +91,11 @@ const DetailPost = () => {
           <Report pid={isReport} setIsReport={setIsReport} />
         </div>
       )}
-      <div className="w-[70%]">
+      <div className="lg:w-[70%] w-full">
         <Slider images={post?.images && JSON.parse(post?.images?.image)} />
         <div className="bg-white rounded-md shadow-md p-4">
           <div className="flex flex-col gap-2">
-            <h2 className="text-xl font-bold text-red-600">{post?.title}</h2>
+            <h2 className="text-xl font-bold text-blue-600">{post?.title}</h2>
             <div className="flex items-center gap-2">
               <span>Chuyên mục:</span>
               <span
@@ -117,10 +132,10 @@ const DetailPost = () => {
             <button
               type="button"
               onClick={() => setIsReport(post?.id)}
-              className="flex items-center gap-2 text-sm bg-red-800 text-white p-2 w-fit"
+              className="flex items-center gap-2 text-sm bg-red-600 text-white p-2 w-fit rounded-md "
             >
               <MdReportProblem />
-              <span className="">Report bài đăng</span>
+              <span className="">Báo cáo bài đăng</span>
             </button>
           </div>
           <div className="mt-8">
@@ -189,21 +204,16 @@ const DetailPost = () => {
               </tbody>
             </table>
           </div>
-          {posts && (
-            <div className="mt-8">
-              <h3 className="font-semibold text-xl my-4">Bản đồ</h3>
-              <Map address={posts[0]?.address} />
-              <span className="text-gray-500 text-sm py-4 text-justify">
-                {underMap[0]}
-              </span>
-              <span className="text-gray-500 text-sm py-4 text-justify italic">{`${posts[0]?.title} - Mã tin: ${posts[0]?.attributes?.hashtag}`}</span>
-              <span className="text-gray-500 text-sm py-4 text-justify">
-                {underMap[1]}
-              </span>
-            </div>
-          )}
+          <div className="w-full h-[300px]">
+            <Map
+              googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAP_API}&v=3.exp&libraries=geometry,drawing,places`}
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={<div style={{ height: `100%` }} />}
+              mapElement={<div style={{ height: `100%` }} />}
+              coords={coords}
+            />
+          </div>
         </div>
-        <div>{posts[0]?.address}</div>
         <div className="mt-4">
           <VoteAndComment
             votes={post?.votes}
@@ -232,10 +242,10 @@ const DetailPost = () => {
           />
         )}
       </div>
-      <div className="w-[30%] flex flex-col gap-8">
+      <div className="lg:w-[30%] w-full flex flex-col gap-8">
         <BoxInfo userData={post?.user} />
-        {/* <RelatedPost /> */}
-        {/* <RelatedPost newPost /> */}
+        <RelatedPost />
+        <RelatedPost newPost />
       </div>
     </div>
   );

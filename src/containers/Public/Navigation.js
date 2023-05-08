@@ -20,7 +20,7 @@ const Navigation = ({ isAdmin }) => {
         isAdmin ? "justify-start" : "justify-center"
       } items-center h-[40px]  text-l`}
     >
-      <div className="w-3/5 flex h-full items-center text-l font-medium">
+      <div className="w-3/5 flex h-full items-center  text-l font-semibold">
         <NavLink
           to={`/`}
           className={({ isActive }) => (isActive ? active : notActive)}

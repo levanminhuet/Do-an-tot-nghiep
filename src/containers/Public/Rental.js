@@ -26,7 +26,9 @@ const Rental = () => {
   return (
     <div className="w-full flex flex-col gap-3">
       <div>
-        <h1 className="text-[28px] font-bold">{categoryCurrent?.header}</h1>
+        <h1 className="text-[28px] text-blue-600 font-bold">
+          {categoryCurrent?.header}
+        </h1>
         <p className="text-base text-gray-700">{categoryCurrent?.subheader}</p>
       </div>
       {/* <Province /> */}

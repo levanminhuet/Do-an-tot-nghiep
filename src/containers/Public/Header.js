@@ -128,7 +128,7 @@ const Header = () => {
               )}
             </div>
           )}
-          {(currentData?.role === "R1" || currentData?.role === "R2") && (
+          {currentData?.role === "R2" && (
             <Button
               text={"Đăng tin mới"}
               textColor="text-white"

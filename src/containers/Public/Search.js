@@ -7,7 +7,6 @@ import { path } from "../../ultils/constant";
 
 const {
   BsChevronRight,
-  HiOutlineLocationMarker,
   TbReportMoney,
   RiCrop2Line,
   MdOutlineHouseSiding,
@@ -26,11 +25,13 @@ const Search = () => {
   const [queries, setQueries] = useState({});
   const [arrMinMax, setArrMinMax] = useState({});
   const [defaultText, setDefaultText] = useState("");
+  const [address, setAddress] = useState("");
 
   useEffect(() => {
     if (!location?.pathname.includes(path.SEARCH)) {
       setArrMinMax({});
       setQueries({});
+      setAddress("");
     }
   }, [location]);
 
@@ -64,9 +65,10 @@ const Search = () => {
     queryText.forEach((item) => {
       queryTextObj[item[0]] = item[1];
     });
+    queryCodesObj.address = address;
     let titleSearch = `${
       queryTextObj.category ? queryTextObj.category : "Cho thuê tất cả"
-    } ${queryTextObj.province ? `tỉnh ${queryTextObj.province}` : ""} ${
+    } ${address ? `địa chỉ ${address}` : ""} ${
       queryTextObj.price ? `giá ${queryTextObj.price}` : ""
     } ${queryTextObj.area ? `diện tích ${queryTextObj.area}` : ""} `;
     navigate(
@@ -79,10 +81,10 @@ const Search = () => {
   };
   return (
     <>
-      <div className="p-[10px] w-3/5 my-3 bg-blue-600 rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2">
+      <div className="p-[10px] w-[95%] md:w-4/5 lg:w-3/5 my-3 bg-blue-600 rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2">
         <span
           onClick={() => handleShowModal(categories, "category", "Tìm tất cả")}
-          className="cursor-pointer flex-1"
+          className="cursor-pointer  w-full"
         >
           <SearchItem
             IconBefore={<MdOutlineHouseSiding />}
@@ -92,20 +94,19 @@ const Search = () => {
             defaultText={"Tìm tất cả"}
           />
         </span>
-        <span
-          onClick={() => handleShowModal(provinces, "province", "Toàn quốc")}
-          className="cursor-pointer flex-1"
-        >
-          <SearchItem
-            IconBefore={<HiOutlineLocationMarker />}
-            IconAfter={<BsChevronRight color="rgb(156, 163, 175)" />}
-            text={queries.province}
-            defaultText={"Toàn quốc"}
-          />
-        </span>
+        <input
+          type="text"
+          className="p-2 outline-none w-full rounded-md text-sm placeholder:text-[13.3px]"
+          placeholder="&#9992; Tìm địa chỉ"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+        />
+        {/* <span onClick={() => handleShowModal(provinces, 'address', 'Địa chỉ')} className='cursor-pointer  w-full'>
+                    <SearchItem IconBefore={<HiOutlineLocationMarker />} IconAfter={<BsChevronRight color='rgb(156, 163, 175)' />} text={queries.province} defaultText={'Địa chỉ'} />
+                </span> */}
         <span
           onClick={() => handleShowModal(prices, "price", "Chọn giá")}
-          className="cursor-pointer flex-1"
+          className="cursor-pointer  w-full"
         >
           <SearchItem
             IconBefore={<TbReportMoney />}
@@ -116,7 +117,7 @@ const Search = () => {
         </span>
         <span
           onClick={() => handleShowModal(areas, "area", "Chọn diện tích")}
-          className="cursor-pointer flex-1"
+          className="cursor-pointer  w-full"
         >
           <SearchItem
             IconBefore={<RiCrop2Line />}
@@ -128,10 +129,9 @@ const Search = () => {
         <button
           type="button"
           onClick={handleSearch}
-          className="outline-none py-2 px-4 flex-1  text-xl flex items-center justify-center gap-2 text-white font-medium"
+          className="outline-none p-2 rounded-full flex-1 bg-secondary1 text-[13.3px] flex items-center justify-center gap-2 text-white font-medium"
         >
-          <FiSearch />
-          Tìm kiếm
+          <FiSearch size={24} />
         </button>
       </div>
       {isShowModal && (

@@ -5,7 +5,7 @@ const User = () => {
   const { currentData } = useSelector((state) => state.user);
 
   return (
-    <div className="text-sm">
+    <div className="text-sm hidden lg:flex">
       {currentData && Object.keys(currentData).length > 0 && (
         <div className="flex items-center gap-2">
           <img
@@ -13,10 +13,12 @@ const User = () => {
             alt="avatar"
             className="w-10 object-cover rounded-full h-10 border-2 shadow-md border-white"
           />
-          <div className="flex flex-col">
+          <div className="flex text-blue-400 flex-col">
             <span>
               Xin chào,{" "}
-              <span className="font-semibold">{currentData?.name}</span>
+              <span className="font-semibold text-blue-400">
+                {currentData?.name}
+              </span>
             </span>
             {/* <span>Mã tài khoản: <span className='font-medium'>{`${currentData?.id?.toUpperCase()}`}</span></span> */}
           </div>

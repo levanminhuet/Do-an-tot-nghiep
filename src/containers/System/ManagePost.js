@@ -5,6 +5,9 @@ import moment from "moment";
 import { Button, UpdatePost } from "../../components";
 import { apiDeletePost, apiRequestExpired } from "../../services";
 import Swal from "sweetalert2";
+import { BiEditAlt } from "react-icons/bi";
+import { MdDelete } from "react-icons/md";
+import EditAccount from "./EditAccount";
 
 const ManagePost = () => {
   const dispach = useDispatch();
@@ -84,8 +87,8 @@ const ManagePost = () => {
         </div>
       )}
       <div className="py-4 border-b border-gray-200 flex items-center justify-between">
-        <h1 className="text-3xl font-medium ">Quản lý tin đăng</h1>
-        <div className="text-sm p-4 rounded-md text-blue-800 bg-blue-200 italic">
+        <h1 className="text-3xl font-medium text-sky-400 ">Quản lý tin đăng</h1>
+        <div className="text-sm p-4 rounded-md text-blue-800 bg-gray-100 italic">
           Sau khi xác nhận gia hạn, vui lòng chủ trọ hãy bank tiền gia hạn theo{" "}
           <a
             className="text-blue-500 hover:underline"
@@ -127,7 +130,7 @@ const ManagePost = () => {
               return (
                 <tr className="text-center" key={item.id}>
                   <td className="text-center py-4 border-b">{item?.id}</td>
-                  <td className="text-center py-4 border-b">{`${item?.title}`}</td>
+                  <td className="text-center py-4 border-b  font-medium">{`${item?.title}`}</td>
                   <td className="text-center py-4 border-b">
                     {item?.attributes?.price}
                   </td>
@@ -139,42 +142,60 @@ const ManagePost = () => {
                   </td>
                   <td className="text-center py-4 border-b">
                     {item?.expireds?.status === "Pending" ? (
-                      <span className="px-4 py-2 bg-orange-500 text-white">
-                        Pending
+                      <span className="px-4 py-2 text-orange-500 text-l">
+                        Gia hạn
                       </span>
                     ) : new Date(item?.expired).getTime() >=
                       new Date().getTime() ? (
-                      <span className="px-4 py-2 bg-green-500 text-white">
-                        Active
+                      <span className="px-4 py-2 text-green-500 font-bold text-l">
+                        Hoạt động
                       </span>
                     ) : (
-                      <span className="px-4 py-2 bg-red-500 text-white">
-                        Expired
+                      <span className="px-4 py-2 font-bold text-red-600 text-l">
+                        Hết hạn
                       </span>
                     )}
                   </td>
-                  <td className="text-center py-1 border-b">
+                  <td className="text-center font-bold  py-1 border-b">
                     {new Date(item?.expired).getTime() < new Date().getTime() &&
                       !item.expireds?.id && (
                         <Button
                           text="Gia hạn"
-                          textColor="text-blue-500 hover:underline py-1"
+                          textColor="text-blue-600 ml-3 hover:underline py-1"
                           onClick={() => setIsExpired(item.id)}
                         />
                       )}
-                    <Button
+                    {/* <Button
                       text="Sửa"
                       textColor="text-blue-500 hover:underline py-1"
                       onClick={() => {
                         dispach(actions.editData(item));
                         setIsEdit(true);
                       }}
-                    />
+                    >
+                    </Button>
                     <Button
                       text="Xóa"
                       textColor="text-blue-500 hover:underline py-1"
                       onClick={() => handleDeletePost(item.id)}
-                    />
+                    /> */}
+                    <div className="pl-2 flex flex-row">
+                      <span
+                        className="p-2 cursor-pointer text-blue-500 hover:underline basis-1/2"
+                        onClick={() => {
+                          dispach(actions.editData(item));
+                          setIsEdit(true);
+                        }}
+                      >
+                        <BiEditAlt color="blue" size="24px" />
+                      </span>
+                      <span
+                        className="p-2 cursor-pointer text-blue-500 hover:underline basis-1/2"
+                        onClick={() => handleDeletePost(item.id)}
+                      >
+                        <MdDelete color="red" size="24px" />
+                      </span>
+                    </div>
                   </td>
                 </tr>
               );

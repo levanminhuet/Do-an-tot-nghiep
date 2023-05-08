@@ -157,11 +157,11 @@ const CreatePost = ({ isEdit }) => {
 
   return (
     <div className="px-6">
-      <h1 className="text-3xl font-medium py-4 border-b border-gray-200">
+      <h1 className="text-3xl font-medium py-4 border-b border-gray-200 text-blue-400">
         {isEdit ? "Chỉnh sửa tin đăng" : "Đăng tin mới"}
       </h1>
-      <div className="flex gap-4">
-        <div className="py-4 flex flex-col gap-8 flex-auto">
+      <div className="flex gap-4 ">
+        <div className="py-4 flex flex-col gap-8 flex-auto ">
           <Address
             invalidFields={invalidFields}
             setInvalidFields={setInvalidFields}

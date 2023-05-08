@@ -11,7 +11,9 @@ const Homepage = () => {
   return (
     <div className="w-full flex flex-col gap-3 bg-[#fff]">
       <div>
-        <h1 className="text-[28px] font-bold">{text.HOME_TITLE}</h1>
+        <h1 className="text-[28px] font-bold text-blue-600">
+          {text.HOME_TITLE}
+        </h1>
         <p className="text-base text-gray-700">{text.HOME_DESCRIPTION}</p>
       </div>
       {/* <Province /> */}

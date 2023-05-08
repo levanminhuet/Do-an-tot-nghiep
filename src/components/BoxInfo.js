@@ -6,7 +6,7 @@ const { BsDot, BsTelephoneFill, SiZalo } = icons;
 
 const BoxInfo = ({ userData }) => {
   return (
-    <div className="w-full bg-blue-600 rounded-md flex flex-col items-center p-4 gap-4">
+    <div className="w-full bg-blue-400 rounded-md flex flex-col items-center p-4 gap-4">
       <img
         src={anonAvatar}
         alt="avatar"

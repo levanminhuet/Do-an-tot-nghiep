@@ -6,7 +6,7 @@ import * as actions from "../../store/actions";
 import { AiOutlineLogout } from "react-icons/ai";
 
 const activeStyle =
-  "hover:bg-sky-400 flex  rounded-md items-center gap-2 py-2 font-bold bg-sky-400";
+  "hover:bg-sky-400 flex  rounded-md items-center gap-2 py-2 font-bold button-bar";
 const notActiceStyle =
   "hover:bg-gray-200 flex  rounded-md items-center gap-2 py-2 cursor-pointer";
 
@@ -28,10 +28,10 @@ const Sidebar = () => {
           </div>
         </div>
         <span>
-          Mã thành viên:{" "}
+          {/* Mã thành viên:{" "}
           <small className="font-medium">
             {currentData?.id?.toUpperCase()}
-          </small>
+          </small> */}
         </span>
       </div>
       <div>
